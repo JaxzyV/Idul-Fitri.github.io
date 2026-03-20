@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Idul Fitri 1447 H</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-green: #1b4332;
+        --dark-green: #081c15;
+        --gold: #d4af37;
+        --paper: #fdf5e6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--dark-green);
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+      }
+
+      /* --- BACKGROUND DECORATION --- */
+      .bg-decor {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0.3;
+        animation: float 10s infinite ease-in-out;
+        z-index: 0;
+        filter: drop-shadow(0 0 10px var(--gold));
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(10deg);
+        }
+      }
+
+      /* --- DOOR SECTION --- */
+      #door-wrapper {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        z-index: 1000;
+        perspective: 2000px;
+        cursor: pointer;
+      }
+
+      .door {
+        width: 50%;
+        height: 100%;
+        background: var(--primary-green);
+        border: 5px solid var(--gold);
+        display: flex;
+        align-items: center;
+        transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        background-image: url("https://www.transparenttextures.com/patterns/islamic-art.png");
+      }
+
+      .door-left {
+        transform-origin: left;
+        justify-content: flex-end;
+      }
+      .door-right {
+        transform-origin: right;
+        justify-content: flex-start;
+      }
+
+      .knob {
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, #f9e2af, var(--gold));
+        border-radius: 50%;
+        margin: 15px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        border: 3px solid #b6932a;
+      }
+
+      /* --- MAIN STAGE --- */
+      #main-stage {
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, #2d6a4f, #081c15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 1s;
+      }
+
+      .login-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        padding: 40px 30px;
+        border-radius: 30px;
+        border: 2px solid var(--gold);
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        z-index: 20;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      input {
+        width: 100%;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 12px;
+        border: 2px solid var(--gold);
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+        outline: none;
+      }
+
+      button {
+        background: linear-gradient(135deg, var(--gold), #b6932a);
+        color: var(--primary-green);
+        border: none;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 800;
+        width: 100%;
+        cursor: pointer;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
+      }
+      button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      }
+
+      /* --- ENVELOPE & PAPER --- */
+      #envelope-wrapper {
+        display: none;
+        position: relative;
+        width: 320px;
+        height: 220px;
+        z-index: 50;
+      }
+
+      .envelope {
+        width: 100%;
+        height: 100%;
+        background: #c29b22;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        position: relative;
+        transition: 0.5s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .envelope::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        border-left: 160px solid transparent;
+        border-right: 160px solid transparent;
+        border-top: 120px solid var(--gold);
+        transform-origin: top;
+        z-index: 2;
+      }
+
+      #paper-msg {
+        display: none;
+        width: 90%;
+        max-width: 450px;
+        background: var(--paper);
+        padding: 45px 30px;
+        border-radius: 2px;
+        position: relative;
+        box-shadow: 5px 15px 40px rgba(0, 0, 0, 0.6);
+        clip-path: polygon(0% 2%, 100% 0%, 98% 98%, 2% 100%, 0% 50%);
+        z-index: 60;
+        animation: paperReveal 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          forwards;
+      }
+
+      @keyframes paperReveal {
+        from {
+          transform: scale(0.5) translateY(200px);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* --- UTILS --- */
+      .falling-item {
+        position: fixed;
+        pointer-events: none;
+        z-index: 999;
+        filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+      }
+
+      .click-burst {
+        position: fixed;
+        pointer-events: none;
+        z-index: 1001;
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body onclick="createClickBurst(event)">
+    <div id="dynamic-bg"></div>
+
+    <audio id="audioIdulFitri" loop>
+      <source src="lebaran.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="door-wrapper" onclick="handleOpenDoor()">
+      <div class="door door-left"><div class="knob"></div></div>
+      <div class="door door-right"><div class="knob"></div></div>
+    </div>
+
+    <div id="main-stage">
+      <div id="ui-input" class="login-box">
+        <h2
+          style="
+            color: var(--gold);
+            font-family: &quot;Playfair Display&quot;;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+          "
+        >
+          Idul Fitri 1447 H
+        </h2>
+        <p style="color: #eee; margin-bottom: 25px">
+          Masukkan Kode Rahasiamu ✨
+        </p>
+        <input type="text" id="kode" placeholder="Kode Rahasia" />
+        <button onclick="prosesLogin('code')">Buka Surat Digital ✉️</button>
+        <button
+          onclick="prosesLogin('guest')"
+          style="
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            margin-top: 10px;
+          "
+        >
+          Tamu Umum
+        </button>
+      </div>
+
+      <div id="envelope-wrapper" onclick="handleOpenEnvelope()">
+        <div class="envelope" id="envObj"></div>
+      </div>
+
+      <div id="paper-msg">
+        <div
+          style="
+            border: 1px solid rgba(182, 147, 42, 0.3);
+            padding: 25px;
+            min-height: 350px;
+            background: url(&quot;https://www.transparenttextures.com/patterns/lined-paper.png&quot;);
+          "
+        >
+          <h3
+            id="nama-tujuan"
+            style="
+              color: var(--primary-green);
+              font-family: &quot;Playfair Display&quot;;
+              border-bottom: 2px solid var(--gold);
+              padding-bottom: 15px;
+              font-size: 1.5rem;
+            "
+          ></h3>
+          <div
+            id="typing-area"
+            style="
+              margin-top: 25px;
+              line-height: 2;
+              color: #222;
+              font-size: 1.05rem;
+              font-weight: 400;
+            "
+          ></div>
+          <a
+            href="#"
+            id="btnWA"
+            class="wa-link"
+            style="
+              display: block;
+              margin-top: 30px;
+              background: #25d366;
+              color: white;
+              text-decoration: none;
+              padding: 15px;
+              border-radius: 12px;
+              text-align: center;
+              font-weight: 700;
+              box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            "
+          >
+            Balas Pesan (WhatsApp) 📱
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const myNumber = "6285331885155"; // GANTI NOMOR WA
+
+      // Inisialisasi Background Dekorasi
+      const bgContainer = document.getElementById("dynamic-bg");
+      const bgEmojis = ["🕌", "🌙", "⭐", "🏮", "✨", "🕋", "☁️"];
+      for (let i = 0; i < 15; i++) {
+        const el = document.createElement("div");
+        el.className = "bg-decor";
+        el.innerText = bgEmojis[Math.floor(Math.random() * bgEmojis.length)];
+        el.style.left = Math.random() * 90 + "vw";
+        el.style.top = Math.random() * 90 + "vh";
+        el.style.fontSize = Math.random() * 2 + 1 + "rem";
+        el.style.animationDelay = Math.random() * 5 + "s";
+        bgContainer.appendChild(el);
+      }
+
+      const daftarPesan = [
+        {
+          kode: "liasayangrapi",
+          nama: "Lia Tersayang 💖",
+          isi: "Selamat Idul Fitri 1447 H, Lia. Di hari yang suci ini, izinkan aku memohon maaf atas segala khilaf baik kata maupun perbuatan. Semoga kebahagiaan selalu menyertai kita hari ini dan selamanya.",
+          balasWA:
+            "Terima kasihh bibit, semoga hari ini selalu diberikan kebahagiaan. Mohon maaf lahir dan batin juga.",
+        },
+        {
+          kode: "terere",
+          nama: "Terere a.k.a Retta",
+          isi: "Jujur, butuh keberanian buat aku kirim pesan ini setelah kita lama lost contact. Mumpung masih Lebaran, aku mau bilang Mohon Maaf Lahir dan Batin ya.. maafkan aku jika ada kesalahan yang belum aku selesaikan, harapanku kedepannya diberi kebaikan dalam setiap jalannya. And see you next Idul Fitri berikutnya.. GOOD LUCK (pesan ini tidak wajib kamu balas aku hanya ingin menyampaikan)",
+          balasWA: "Selamat lebaran semuanya! Mohon maaf lahir batin.",
+        },
+        {
+          kode: "GUEST",
+          nama: "Teman ✨",
+          isi: "Selamat Hari Raya Idul Fitri 1447 H. Semoga cahaya kemenangan ini membawa kedamaian, kesehatan, dan keberkahan untuk kita semua. Mohon maaf lahir dan batin.",
+          balasWA: "Selamat lebaran! Mohon maaf lahir dan batin juga ya.",
+        },
+      ];
+
+      let selectedUser = null;
+
+      function handleOpenDoor() {
+        document.querySelector(".door-left").style.transform =
+          "rotateY(-115deg)";
+        document.querySelector(".door-right").style.transform =
+          "rotateY(115deg)";
+        document.getElementById("main-stage").style.opacity = "1";
+        document.getElementById("audioIdulFitri").play();
+        setTimeout(() => {
+          document.getElementById("door-wrapper").style.display = "none";
+        }, 1500);
+      }
+
+      function prosesLogin(type) {
+        const inputVal = document
+          .getElementById("kode")
+          .value.trim()
+          .toUpperCase(); // Input diubah ke CAPS
+
+        if (type === "code") {
+          // Tambahkan .toUpperCase() pada x.kode agar cocok dengan inputVal
+          selectedUser = daftarPesan.find(
+            (x) => x.kode.toUpperCase() === inputVal,
+          );
+
+          if (!selectedUser) {
+            alert("Maaf, kode rahasia tidak ditemukan.");
+            return;
+          }
+        } else {
+          selectedUser = daftarPesan.find((x) => x.kode === "GUEST");
+        }
+
+        document.getElementById("ui-input").style.display = "none";
+        document.getElementById("envelope-wrapper").style.display = "block";
+      }
+
+      function handleOpenEnvelope() {
+        const env = document.getElementById("envObj");
+        const wrapper = document.getElementById("envelope-wrapper");
+        const paper = document.getElementById("paper-msg");
+
+        env.style.opacity = "0";
+        env.style.transform = "scale(0.8) translateY(50px)";
+
+        setTimeout(() => {
+          wrapper.style.display = "none";
+          paper.style.display = "block";
+          startHujanDekorasi();
+
+          document.getElementById("nama-tujuan").innerText =
+            "Kepada: " + selectedUser.nama;
+          document.getElementById("btnWA").href =
+            `https://wa.me/${myNumber}?text=${encodeURIComponent(selectedUser.balasWA)}`;
+
+          setTimeout(() => startTyping(selectedUser.isi), 800);
+        }, 500);
+      }
+
+      function startTyping(text) {
+        let i = 0;
+        const area = document.getElementById("typing-area");
+        area.innerHTML = "";
+        function type() {
+          if (i < text.length) {
+            area.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 45);
+          }
+        }
+        type();
+      }
+
+      function startHujanDekorasi() {
+        const emojis = [
+          "💵",
+          "💰",
+          "✨",
+          "🌙",
+          "🏮",
+          "💎",
+          "🧧",
+          "🎆",
+          "🕌",
+          "🎋",
+        ];
+        for (let i = 0; i < 150; i++) {
+          // Lebih banyak
+          setTimeout(() => {
+            const item = document.createElement("div");
+            item.className = "falling-item";
+            item.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            item.style.left = Math.random() * 100 + "vw";
+            item.style.fontSize = Math.random() * 1.5 + 1 + "rem";
+            item.style.top = "-50px";
+            document.body.appendChild(item);
+
+            item.animate(
+              [
+                { transform: "translateY(0) rotate(0deg)", opacity: 1 },
+                {
+                  transform: `translateY(110vh) rotate(${Math.random() * 1000}deg)`,
+                  opacity: 0,
+                },
+              ],
+              {
+                duration: 3000 + Math.random() * 3000,
+                easing: "cubic-bezier(.37,.01,.67,1)",
+              },
+            ).onfinish = () => item.remove();
+          }, i * 60);
+        }
+      }
+
+      // Efek Interaktif: Klik meledak
+      function createClickBurst(e) {
+        const burstEmojis = ["🌸", "⭐", "✨", "💛", "🎊"];
+        for (let i = 0; i < 6; i++) {
+          const span = document.createElement("span");
+          span.className = "click-burst";
+          span.innerText =
+            burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+          span.style.left = e.clientX + "px";
+          span.style.top = e.clientY + "px";
+          document.body.appendChild(span);
+
+          const angle = (i / 6) * Math.PI * 2;
+          const velocity = 100 + Math.random() * 50;
+
+          span.animate(
+            [
+              { transform: "translate(0, 0) scale(1)", opacity: 1 },
+              {
+                transform: `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) scale(0)`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: 800,
+              easing: "ease-out",
+            },
+          ).onfinish = () => span.remove();
+        }
+      }
+    </script>
+  </body>
+</html>
